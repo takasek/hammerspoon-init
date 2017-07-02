@@ -23,7 +23,7 @@ eventtap = hs.eventtap.new({hs.eventtap.event.types.keyDown, hs.eventtap.event.t
         -- 英数かな同時押し
         -- ESCとして扱う
         return true, {
-            hs.eventtap.event.newKeyEvent({}, hs.keycodes.map["escape"], isDown)
+            hs.eventtap.event.newKeyEvent(ev:getFlags(), hs.keycodes.map["escape"], isDown)
         }
     else
         -- 英数かな、いずれか押されている
@@ -39,9 +39,9 @@ eventtap = hs.eventtap.new({hs.eventtap.event.types.keyDown, hs.eventtap.event.t
         for k, v in pairs(remapTable) do
             if key == k then
                 -- 該当するキーがあればリマップする
---                 print(eventType, v, isDown)
+--                 print(eventType, ev:getFlags(), v, isDown)
                 return true, {
-                    hs.eventtap.event.newKeyEvent({}, v, isDown)
+                    hs.eventtap.event.newKeyEvent(ev:getFlags(), v, isDown)
                 }
             end
         end
